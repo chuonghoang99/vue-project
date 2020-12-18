@@ -1,19 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./App.vue";
-
-
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
-
 import LightBootstrap from "./light-bootstrap-main";
-
 import routes from "./routes/routes";
-
 import store from "./store/store";
-
 import "./registerServiceWorker";
-
 import axios from "axios";
 import VueAxios from "vue-axios";
 Vue.use(VueAxios, axios);
