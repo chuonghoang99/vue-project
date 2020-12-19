@@ -145,7 +145,7 @@ export default {
     let username = localStorage.getItem("userNameClick");
     let id = localStorage.getItem("idDeviceClick");
 
-    let url = "/api/admin/" + username + "/device/" + id;
+    let url = `/api/admin/${username}/device/${id}`;
     //console.log("url: ", url);
 
     axios
@@ -156,11 +156,18 @@ export default {
       })
       .then(result => {
         this.deviceDetail = result.data;
-        this.checked_01 = this.deviceDetail.sensorList[0].status;
-        this.checked_02 = this.deviceDetail.sensorList[1].status;
-        this.checked_03 = this.deviceDetail.sensorList[2].status;
-        this.checked_04 = this.deviceDetail.sensorList[3].status;
-        this.checked_05 = this.deviceDetail.sensorList[4].status;
+
+        this.listSensor = result.data.sensorList;
+        this.listSensor.sort((a, b) => {
+          if (a.code < b.code) return -1;
+          return a.code > b.code ? 1 : 0;
+        });
+
+        this.checked_01 = this.listSensor[0].status;
+        this.checked_02 = this.listSensor[1].status;
+        this.checked_03 = this.listSensor[2].status;
+        this.checked_04 = this.listSensor[3].status;
+        this.checked_05 = this.listSensor[4].status;
 
         console.log(this.deviceDetail.sensorList);
         // this.deviceDetail.sensorList.sort(dynamicSort("id"));
@@ -177,7 +184,8 @@ export default {
       checked_03: "",
       checked_04: "",
       checked_05: "",
-      deviceDetail: ""
+      deviceDetail: "",
+      listSensor: ""
     };
   },
 
@@ -191,32 +199,32 @@ export default {
 
       // debugger;
       let sensor1 = {
-        id: this.deviceDetail.sensorList[0].id,
-        name: this.deviceDetail.sensorList[0].name,
+        id: this.listSensor[0].id,
+        name: this.listSensor[0].name,
         code: "SENSOR1",
         status: this.checked_01 ? 1 : 0
       };
       let sensor2 = {
-        id: this.deviceDetail.sensorList[1].id,
-        name: this.deviceDetail.sensorList[1].name,
+        id: this.listSensor[1].id,
+        name: this.listSensor[1].name,
         code: "SENSOR2",
         status: this.checked_02 ? 1 : 0
       };
       let sensor3 = {
-        id: this.deviceDetail.sensorList[2].id,
-        name: this.deviceDetail.sensorList[2].name,
+        id: this.listSensor[2].id,
+        name: this.listSensor[2].name,
         code: "SENSOR3",
         status: this.checked_03 ? 1 : 0
       };
       let sensor4 = {
-        id: this.deviceDetail.sensorList[3].id,
-        name: this.deviceDetail.sensorList[3].name,
+        id: this.listSensor[3].id,
+        name: this.listSensor[3].name,
         code: "SENSOR4",
         status: this.checked_04 ? 1 : 0
       };
       let sensor5 = {
-        id: this.deviceDetail.sensorList[4].id,
-        name: this.deviceDetail.sensorList[4].name,
+        id: this.listSensor[4].id,
+        name: this.listSensor[4].name,
         code: "SENSOR5",
         status: this.checked_05 ? 1 : 0
       };
@@ -231,9 +239,9 @@ export default {
       // let a = JSON.stringify(json);
       // console.log(a);
       //debugger;
-      console.log("json edit: ", json);
+      // console.log("json edit: ", json);
 
-      console.log("json put ", json);
+      // console.log("json put ", json);
 
       let userLogin = JSON.parse(localStorage.getItem("userLogin"));
       const url = "/api/admin/" + userLogin.username + "/device";
@@ -246,7 +254,7 @@ export default {
           }
         })
         .then(result => {
-          console.log("aaaaaaaaa");
+          //  console.log("aaaaaaaaa");
           console.log(result.data);
           alert("Update Success");
         })

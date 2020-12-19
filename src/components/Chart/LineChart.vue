@@ -47,11 +47,11 @@ export default {
       }
     };
   },
-  created() {
-    setInterval(() => {
-      // console.log("dat oc cho");
-      this.renderChart(this.data, this.options);
-    }, 5000);
+  mounted() {
+    // this.renderChart(this.data, this.options);
+    // setInterval(() => {
+    // console.log("dat oc cho");
+    this.renderChart(this.data, this.options);
   }
 };
 </script>

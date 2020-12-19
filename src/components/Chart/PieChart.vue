@@ -27,18 +27,19 @@ export default {
       options: {
         title: {
           display: true,
-          text: "Bieu do duong"
+          text: "Bieu do %"
         },
         responsive: true,
         maintainAspectRatio: false
       }
     };
   },
-  created() {
-    setInterval(() => {
-      // console.log("dat oc cho");
-      this.renderChart(this.data, this.options);
-    }, 5000);
+  mounted() {
+    // setInterval(() => {
+    //   // console.log("dat oc cho");
+    //   this.renderChart(this.data, this.options);
+    // }, 5000);
+    this.renderChart(this.data, this.options);
   }
 };
 </script>

@@ -1,20 +1,26 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
 import App from "./App.vue";
+import "./registerServiceWorker";
+
+//  Bootstrap
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 import LightBootstrap from "./light-bootstrap-main";
-import routes from "./routes/routes";
+Vue.use(LightBootstrap);
+
+// Vuex
 import store from "./store/store";
-import "./registerServiceWorker";
+
+// Axios
 import axios from "axios";
 import VueAxios from "vue-axios";
 Vue.use(VueAxios, axios);
-Vue.use(VueRouter);
-
-Vue.use(LightBootstrap);
-
 Vue.axios.defaults.baseURL = "http://localhost:8080/SpringIOT";
+
+// Router
+import VueRouter from "vue-router";
+import routes from "./routes/routes";
+Vue.use(VueRouter);
 const router = new VueRouter({
   routes,
   linkActiveClass: "nav-item active",
@@ -26,6 +32,11 @@ const router = new VueRouter({
     }
   }
 });
+
+//   vue-apexcharts
+import VueApexCharts from "vue-apexcharts";
+Vue.use(VueApexCharts);
+Vue.component("apexchart", VueApexCharts);
 
 new Vue({
   el: "#app",

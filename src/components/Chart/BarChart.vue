@@ -40,11 +40,12 @@ export default {
       }
     };
   },
-  created() {
-    setInterval(() => {
-      // console.log("dat oc cho");
-      this.renderChart(this.data, this.options);
-    }, 5000);
+  mounted() {
+    // setInterval(() => {
+    //   // console.log("dat oc cho");
+    //   this.renderChart(this.data, this.options);
+    // }, 5000);
+    this.renderChart(this.data, this.options);
   }
 };
 </script>

@@ -32,7 +32,7 @@
             type="text"
             label="Sensor 01"
             placeholder="Name Sensor 01"
-            v-model="deviceDetail.sensorList[0].name"
+            v-model="listSensor[0].name"
           >
           </base-input>
         </div>
@@ -41,7 +41,7 @@
             :disabled="true"
             type="checkbox"
             id="name_sensor_01"
-            :checked="deviceDetail.sensorList[0].status"
+            :checked="listSensor[0].status"
           /><label for="name_sensor_01"
             ><span class="ml-1">Collect</span></label
           >
@@ -53,7 +53,7 @@
             type="text"
             label="Sensor 02"
             placeholder="Name Sensor 02"
-            v-model="deviceDetail.sensorList[1].name"
+            v-model="listSensor[1].name"
           >
           </base-input>
         </div>
@@ -62,7 +62,7 @@
             :disabled="true"
             type="checkbox"
             id="name_sensor_02"
-            :checked="deviceDetail.sensorList[1].status"
+            :checked="listSensor[1].status"
           /><label for="name_sensor_02"
             ><span class="ml-1">Collect</span></label
           >
@@ -73,7 +73,7 @@
             type="text"
             label="Sensor 03"
             placeholder="Name Sensor 03"
-            v-model="deviceDetail.sensorList[2].name"
+            v-model="listSensor[2].name"
           >
           </base-input>
         </div>
@@ -82,7 +82,7 @@
             type="checkbox"
             id="name_sensor_03"
             :disabled="true"
-            :checked="deviceDetail.sensorList[2].status"
+            :checked="listSensor[2].status"
           /><label for="name_sensor_03"
             ><span class="ml-1">Collect</span></label
           >
@@ -96,7 +96,7 @@
             :disabled="true"
             label="Sensor 04"
             placeholder="Name Sensor 04"
-            v-model="deviceDetail.sensorList[3].name"
+            v-model="listSensor[3].name"
           >
           </base-input>
         </div>
@@ -105,7 +105,7 @@
             type="checkbox"
             :disabled="true"
             id="name_sensor_04"
-            :checked="deviceDetail.sensorList[3].status"
+            :checked="listSensor[3].status"
           /><label for="name_sensor_04"
             ><span class="ml-1">Collect</span></label
           >
@@ -117,7 +117,7 @@
             :disabled="true"
             label="Sensor 05"
             placeholder="Name Sensor 05"
-            v-model="deviceDetail.sensorList[4].name"
+            v-model="listSensor[4].name"
           >
           </base-input>
         </div>
@@ -131,6 +131,26 @@
 
       <div class="clearfix"></div>
     </form>
+
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="card col-md-7 ml-3">
+            Biểu đồ 1
+          </div>
+
+          <div class="card col-md-4 ml-5 mr-4 ">
+            biểu đồ 2
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="card col-md-11 ml-3">
+            biểu đồ 3
+          </div>
+        </div>
+      </div>
+    </div>
   </card>
 </template>
 <script>
@@ -139,8 +159,9 @@ import axios from "axios";
 
 export default {
   created() {
+    /// info device
     let id = localStorage.getItem("idDeviceClick");
-    let url = "/api/device/" + id;
+    let url = `/api/device/${id}`;
     axios
       .get(url, {
         headers: {
@@ -149,15 +170,63 @@ export default {
       })
       .then(result => {
         this.deviceDetail = result.data;
-        console.log("device detail: ", this.deviceDetail);
+        this.listSensor = result.data.sensorList;
+        this.listSensor.sort((a, b) => {
+          if (a.code < b.code) return -1;
+          return a.code > b.code ? 1 : 0;
+        });
       })
       .catch(error => {
         throw new Error(`API ${error}`);
       });
+
+    // get data sensor
+    //Lấy tất cả dữ liệu sensor có status=1 liên quan đến device
+    // /api/device/{id}/alldata
+
+    axios.get(`/api/device/${id}/alldata`).then(result => {
+      this.dataSensor = result.data;
+
+      this.dataSensor.sort((a, b) => {
+        if (a.code < b.code) return -1;
+        return a.code > b.code ? 1 : 0;
+      });
+
+      console.log(this.dataSensor);
+      var data = [];
+      for (let i = 0; i < 5; i++) {
+        data[i] = [];
+        if (this.dataSensor[i].sensorDataList.length != 0) {
+          this.dataSensor[i].sensorDataList.forEach(element => {
+            console.log("aaaaa");
+            let newLength = data[i].push(element.value);
+          });
+        }
+      }
+      //console.log(data[0]);
+      this.dataSensor1 = data[0];
+      this.dataSensor2 = data[1];
+      this.dataSensor3 = data[2];
+      this.dataSensor4 = data[3];
+      this.dataSensor5 = data[4];
+
+      console.log(this.dataSensor1);
+      console.log(this.dataSensor2);
+    });
   },
   data() {
     return {
-      deviceDetail: ""
+      deviceDetail: "",
+      listSensor: "",
+
+      // data
+      dataSensor: "",
+
+      dataSensor1: "",
+      dataSensor2: "",
+      dataSensor3: "",
+      dataSensor4: "",
+      dataSensor5: ""
     };
   }
 };
