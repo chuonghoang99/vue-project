@@ -154,82 +154,78 @@
   </card>
 </template>
 <script>
-import Card from "src/components/Cards/Card.vue";
-import axios from "axios";
+import Card from 'src/components/Cards/Card.vue'
+import axios from 'axios'
 
 export default {
   created() {
     /// info device
-    let id = localStorage.getItem("idDeviceClick");
-    let url = `/api/device/${id}`;
+    let id = localStorage.getItem('idDeviceClick')
+    let url = `/api/device/${id}`
     axios
       .get(url, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
+          Authorization: 'Bearer ' + localStorage.getItem('token')
         }
       })
       .then(result => {
-        this.deviceDetail = result.data;
-        this.listSensor = result.data.sensorList;
+        this.deviceDetail = result.data
+        this.listSensor = result.data.sensorList
         this.listSensor.sort((a, b) => {
-          if (a.code < b.code) return -1;
-          return a.code > b.code ? 1 : 0;
-        });
+          if (a.code < b.code) return -1
+          return a.code > b.code ? 1 : 0
+        })
       })
       .catch(error => {
-        throw new Error(`API ${error}`);
-      });
-
+        throw new Error(`API ${error}`)
+      })
     // get data sensor
-    //Lấy tất cả dữ liệu sensor có status=1 liên quan đến device
-    // /api/device/{id}/alldata
-
     axios.get(`/api/device/${id}/alldata`).then(result => {
-      this.dataSensor = result.data;
+      this.dataSensor = result.data
 
       this.dataSensor.sort((a, b) => {
-        if (a.code < b.code) return -1;
-        return a.code > b.code ? 1 : 0;
-      });
+        if (a.code < b.code) return -1
+        return a.code > b.code ? 1 : 0
+      })
 
-      console.log(this.dataSensor);
-      var data = [];
+      console.log(this.dataSensor)
+      var data = []
       for (let i = 0; i < 5; i++) {
-        data[i] = [];
+        data[i] = []
         if (this.dataSensor[i].sensorDataList.length != 0) {
           this.dataSensor[i].sensorDataList.forEach(element => {
-            console.log("aaaaa");
-            let newLength = data[i].push(element.value);
-          });
+            console.log('aaaaa')
+            let newLength = data[i].push(element.value)
+          })
         }
       }
       //console.log(data[0]);
-      this.dataSensor1 = data[0];
-      this.dataSensor2 = data[1];
-      this.dataSensor3 = data[2];
-      this.dataSensor4 = data[3];
-      this.dataSensor5 = data[4];
+      this.dataSensor1 = data[0]
+      this.dataSensor2 = data[1]
+      this.dataSensor3 = data[2]
+      this.dataSensor4 = data[3]
+      this.dataSensor5 = data[4]
 
-      console.log(this.dataSensor1);
-      console.log(this.dataSensor2);
-    });
+      console.log(this.dataSensor1)
+      console.log(this.dataSensor2)
+    })
   },
   data() {
     return {
-      deviceDetail: "",
-      listSensor: "",
+      deviceDetail: '',
+      listSensor: '',
 
       // data
-      dataSensor: "",
+      dataSensor: '',
 
-      dataSensor1: "",
-      dataSensor2: "",
-      dataSensor3: "",
-      dataSensor4: "",
-      dataSensor5: ""
-    };
+      dataSensor1: '',
+      dataSensor2: '',
+      dataSensor3: '',
+      dataSensor4: '',
+      dataSensor5: ''
+    }
   }
-};
+}
 </script>
 
 <style scoped>

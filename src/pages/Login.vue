@@ -70,40 +70,40 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
-      username: "",
-      password: ""
-    };
+      username: '',
+      password: ''
+    }
   },
   methods: {
     handleSubmit() {
       axios
-        .post("/api/auth/signin", {
+        .post('/api/auth/signin', {
           username: this.username,
           password: this.password
         })
         .then(result => {
-          console.log("thanh: ", result.data);
-          console.log("result login: ", result.data);
-          localStorage.setItem("userLogin", JSON.stringify(result.data.user));
-          localStorage.setItem("token", result.data.jwt);
-          if (result.data.user.authorities[0].authority == "ROLE_USER") {
-            alert("Ban dang nhap voi tu cach user");
-            this.$router.push("/user/list-device");
-          } else if (result.data.user.authorities[0].authority == "ROLE_ADMIN")
-            this.$router.push("/admin/overview");
+          console.log('thanh: ', result.data)
+          console.log('result login: ', result.data)
+          localStorage.setItem('userLogin', JSON.stringify(result.data.user))
+          localStorage.setItem('token', result.data.jwt)
+          if (result.data.user.authorities[0].authority == 'ROLE_USER') {
+            alert('Ban dang nhap voi tu cach user')
+            this.$router.push('/user/list-device')
+          } else if (result.data.user.authorities[0].authority == 'ROLE_ADMIN')
+            this.$router.push('/admin/overview')
         })
         .catch(error => {
-          alert("Error: Dang nhap loi hoac tai khoan khong ton tai");
-          throw new Error(`API ${error}`);
-        });
+          alert('Error: Dang nhap loi hoac tai khoan khong ton tai')
+          throw new Error(`API ${error}`)
+        })
     }
   }
-};
+}
 </script>
 
 <style scope>
@@ -125,7 +125,7 @@ export default {
 }
 
 .register:after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }

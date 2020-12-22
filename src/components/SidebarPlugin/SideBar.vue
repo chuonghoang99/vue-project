@@ -38,7 +38,7 @@
   </div>
 </template>
 <script>
-import SidebarLink from "./SidebarLink.vue";
+import SidebarLink from './SidebarLink.vue'
 
 export default {
   components: {
@@ -47,41 +47,35 @@ export default {
   props: {
     title: {
       type: String,
-      default: "TEAM IOT"
+      default: 'TEAM IOT'
     },
     backgroundColor: {
       type: String,
-      default: "black",
+      default: 'black',
       validator: value => {
         let acceptedValues = [
-          "",
-          "blue",
-          "azure",
-          "green",
-          "orange",
-          "red",
-          "purple",
-          "black"
-        ];
-        return acceptedValues.indexOf(value) !== -1;
+          '',
+          'blue',
+          'azure',
+          'green',
+          'orange',
+          'red',
+          'purple',
+          'black'
+        ]
+        return acceptedValues.indexOf(value) !== -1
       }
     },
     backgroundImage: {
       type: String,
-      default: "img/sidebar-1.jpg"
+      default: 'img/sidebar-1.jpg'
     },
     activeColor: {
       type: String,
-      default: "success",
+      default: 'success',
       validator: value => {
-        let acceptedValues = [
-          "primary",
-          "info",
-          "success",
-          "warning",
-          "danger"
-        ];
-        return acceptedValues.indexOf(value) !== -1;
+        let acceptedValues = ['primary', 'info', 'success', 'warning', 'danger']
+        return acceptedValues.indexOf(value) !== -1
       }
     },
     sidebarLinks: {
@@ -96,16 +90,16 @@ export default {
   provide() {
     return {
       autoClose: this.autoClose
-    };
+    }
   },
   computed: {
     sidebarStyle() {
       return {
         backgroundImage: `url(${this.backgroundImage})`
-      };
+      }
     }
   }
-};
+}
 </script>
 <style>
 .sidebar .sidebar-wrapper {

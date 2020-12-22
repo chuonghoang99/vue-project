@@ -48,28 +48,28 @@
   </div>
 </template>
 <script>
-import Card from "src/components/Cards/Card.vue";
-import axios from "axios";
-import { mapState } from "vuex";
+import Card from 'src/components/Cards/Card.vue'
+import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
   created() {
-    let userLogin = JSON.parse(localStorage.getItem("userLogin"));
-    let id = userLogin.id;
+    let userLogin = JSON.parse(localStorage.getItem('userLogin'))
+    let id = userLogin.id
 
     axios
-      .get("api/device/list", {
+      .get('api/device/list', {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
+          Authorization: 'Bearer ' + localStorage.getItem('token')
         }
       })
       .then(result => {
-        this.listDevice = result.data;
+        this.listDevice = result.data
         // console.log(result.data);
         // debugger;
       })
       .catch(error => {
-        throw new Error(`API ${error}`);
-      });
+        throw new Error(`API ${error}`)
+      })
 
     //  /api/cdeeiv / list;
   },
@@ -78,27 +78,27 @@ export default {
   },
   data() {
     return {
-      listDevice: "",
-      theadDevice: ["Id", "Name", "Alive", "Create At", "Action"]
-    };
+      listDevice: '',
+      theadDevice: ['Id', 'Name', 'Alive', 'Create At', 'Action']
+    }
   },
 
   methods: {
     getIdDevice(id) {
-      localStorage.setItem("idDeviceClick", id);
+      localStorage.setItem('idDeviceClick', id)
     }
   },
   filters: {
     capitalize: function(value) {
-      if (!value) return "";
-      value = value.toString();
-      return value.charAt(0).toUpperCase() + value.slice(1);
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
     },
     convertToDate(value) {
-      if (!value) return "";
-      else return new Date(value).toUTCString();
+      if (!value) return ''
+      else return new Date(value).toUTCString()
     }
   }
-};
+}
 </script>
 <style></style>

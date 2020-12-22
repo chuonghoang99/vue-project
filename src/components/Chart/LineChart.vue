@@ -1,8 +1,8 @@
 <script>
-import { Line } from "vue-chartjs";
+import { Line } from 'vue-chartjs'
 
 export default {
-  name: "LineChart",
+  name: 'LineChart',
   extends: Line,
   data() {
     return {
@@ -12,23 +12,23 @@ export default {
         datasets: [
           {
             data: [70, 95, 100, 120, 257, 271, 300, 321, 383, 450],
-            label: "chuong",
-            borderColor: "#3e95cd"
+            label: 'chuong',
+            borderColor: '#3e95cd'
           },
           {
             data: [70, 80, 111, 129, 135, 209, 247, 372, 400, 426],
-            label: "dinh",
-            borderColor: "#8e5ea2"
+            label: 'dinh',
+            borderColor: '#8e5ea2'
           },
           {
             data: [70, 78, 128, 150, 203, 276, 300, 317, 375, 434],
-            label: "Hoang",
-            borderColor: "#3cba9f"
+            label: 'Hoang',
+            borderColor: '#3cba9f'
           },
           {
             data: [70, 107, 170, 200, 254, 293, 314, 337, 268, 384],
-            label: "dat",
-            borderColor: "#e8c3b9"
+            label: 'dat',
+            borderColor: '#e8c3b9'
           }
           // {
           //   data: [70, 100, 135, 157, 187, 201, 222, 272, 312, 433],
@@ -40,20 +40,20 @@ export default {
       options: {
         title: {
           display: true,
-          text: "Bieu do duong"
+          text: 'Bieu do duong'
         },
         responsive: true,
         maintainAspectRatio: false
       }
-    };
+    }
   },
   mounted() {
     // this.renderChart(this.data, this.options);
     // setInterval(() => {
     // console.log("dat oc cho");
-    this.renderChart(this.data, this.options);
+    this.renderChart(this.data, this.options)
   }
-};
+}
 </script>
 
 <style></style>

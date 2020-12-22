@@ -1,24 +1,24 @@
 <script>
-import { Pie } from "vue-chartjs";
+import { Pie } from 'vue-chartjs'
 
 export default {
-  name: "LineChart",
+  name: 'LineChart',
   extends: Pie,
   data() {
     return {
       data: {
-        labels: ["1990", "1995", "2000", "2005", "2010", "2015", "2020"],
+        labels: ['1990', '1995', '2000', '2005', '2010', '2015', '2020'],
         datasets: [
           {
-            label: "đơn vị (triệu tấn)",
+            label: 'đơn vị (triệu tấn)',
             backgroundColor: [
-              "#3e95cd",
-              "#8e5ea2",
-              "#3cba9f",
-              "#e8c3b9",
-              "#c45850",
-              "#dcd615",
-              "#57d408"
+              '#3e95cd',
+              '#8e5ea2',
+              '#3cba9f',
+              '#e8c3b9',
+              '#c45850',
+              '#dcd615',
+              '#57d408'
             ],
             data: [63.2, 52.1, 73.4, 78.4, 80.5, 79.2, 82.1]
           }
@@ -27,21 +27,21 @@ export default {
       options: {
         title: {
           display: true,
-          text: "Bieu do %"
+          text: 'Bieu do %'
         },
         responsive: true,
         maintainAspectRatio: false
       }
-    };
+    }
   },
   mounted() {
     // setInterval(() => {
     //   // console.log("dat oc cho");
     //   this.renderChart(this.data, this.options);
     // }, 5000);
-    this.renderChart(this.data, this.options);
+    this.renderChart(this.data, this.options)
   }
-};
+}
 </script>
 
 <style></style>

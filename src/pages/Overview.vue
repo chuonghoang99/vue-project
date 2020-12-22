@@ -74,17 +74,17 @@
   </div>
 </template>
 <script>
-import StatsCard from "src/components/Cards/StatsCard.vue";
+import StatsCard from 'src/components/Cards/StatsCard.vue'
 
-import LineChart from "src/components/Chart/LineChart";
-import PieChart from "src/components/Chart/PieChart";
-import BarChart from "src/components/Chart/BarChart";
+import LineChart from 'src/components/Chart/LineChart'
+import PieChart from 'src/components/Chart/PieChart'
+import BarChart from 'src/components/Chart/BarChart'
 
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 export default {
   created() {
-    this.$store.dispatch("loadListDevice");
-    this.$store.dispatch("loadListUser");
+    this.$store.dispatch('loadListDevice')
+    this.$store.dispatch('loadListUser')
   },
   components: {
     StatsCard,
@@ -93,14 +93,14 @@ export default {
     BarChart
   },
   computed: {
-    ...mapGetters(["totalUser", "totalDevice"])
+    ...mapGetters(['totalUser', 'totalDevice'])
   },
   data() {
     return {
       totalData: 0,
       total: 0
-    };
+    }
   }
-};
+}
 </script>
 <style></style>

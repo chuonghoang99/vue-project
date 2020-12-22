@@ -134,33 +134,33 @@
   </card>
 </template>
 <script>
-import Card from "src/components/Cards/Card.vue";
-import axios from "axios";
+import Card from 'src/components/Cards/Card.vue'
+import axios from 'axios'
 
 export default {
   created() {
-    let id = localStorage.getItem("idDeviceClick");
-    let url = "/api/device/" + id;
+    let id = localStorage.getItem('idDeviceClick')
+    let url = '/api/device/' + id
     axios
       .get(url, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
+          Authorization: 'Bearer ' + localStorage.getItem('token')
         }
       })
       .then(result => {
-        this.deviceDetail = result.data;
-        console.log("device detail: ", this.deviceDetail);
+        this.deviceDetail = result.data
+        console.log('device detail: ', this.deviceDetail)
       })
       .catch(error => {
-        throw new Error(`API ${error}`);
-      });
+        throw new Error(`API ${error}`)
+      })
   },
   data() {
     return {
-      deviceDetail: ""
-    };
+      deviceDetail: ''
+    }
   }
-};
+}
 </script>
 
 <style scoped>

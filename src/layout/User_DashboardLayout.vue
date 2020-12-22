@@ -22,10 +22,10 @@
 </template>
 <style lang="scss"></style>
 <script>
-import TopNavbar from "./TopNavbar.vue";
-import ContentFooter from "./ContentFooter.vue";
-import DashboardContent from "./Content.vue";
-import MobileMenu from "./MobileMenu.vue";
+import TopNavbar from './TopNavbar.vue'
+import ContentFooter from './ContentFooter.vue'
+import DashboardContent from './Content.vue'
+import MobileMenu from './MobileMenu.vue'
 export default {
   components: {
     TopNavbar,
@@ -36,11 +36,11 @@ export default {
   methods: {
     toggleSidebar() {
       if (this.$sidebar.showSidebar) {
-        this.$sidebar.displaySidebar(false);
+        this.$sidebar.displaySidebar(false)
       }
     }
   }
-};
+}
 </script>
 <style scoped>
 .fade-enter-active,

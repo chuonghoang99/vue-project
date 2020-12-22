@@ -2,7 +2,7 @@
   <div class="content"></div>
 </template>
 <script>
-import Card from "src/components/Cards/Card.vue";
+import Card from 'src/components/Cards/Card.vue'
 
 export default {
   components: {
@@ -10,24 +10,24 @@ export default {
   },
   data() {
     return {
-      type: ["", "info", "success", "warning", "danger"],
+      type: ['', 'info', 'success', 'warning', 'danger'],
       notifications: {
         topCenter: false
       }
-    };
+    }
   },
   methods: {
     notifyVue(verticalAlign, horizontalAlign) {
-      const color = Math.floor(Math.random() * 4 + 1);
+      const color = Math.floor(Math.random() * 4 + 1)
       this.$notifications.notify({
         message: `<span>Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer.</span>`,
-        icon: "nc-icon nc-app",
+        icon: 'nc-icon nc-app',
         horizontalAlign: horizontalAlign,
         verticalAlign: verticalAlign,
         type: this.type[color]
-      });
+      })
     }
   }
-};
+}
 </script>
 <style lang="scss"></style>

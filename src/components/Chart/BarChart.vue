@@ -1,8 +1,8 @@
 <script>
-import { Bar } from "vue-chartjs";
+import { Bar } from 'vue-chartjs'
 
 export default {
-  name: "BarChart",
+  name: 'BarChart',
   extends: Bar,
   data() {
     return {
@@ -12,20 +12,20 @@ export default {
         datasets: [
           {
             data: [70, 95, 100, 120, 257, 271, 300, 321, 383, 450, 300, 150],
-            label: "đơn vị tấn (nước)",
+            label: 'đơn vị tấn (nước)',
             backgroundColor: [
-              "#3e95cd",
-              "#8e5ea2",
-              "#3cba9f",
-              "#e8c3b9",
-              "#c45850",
-              "#ff66ff",
-              "#3300ff",
-              "#00cccc",
-              "#ffff00",
-              "#ff3300",
-              "#0000cc",
-              "#330033"
+              '#3e95cd',
+              '#8e5ea2',
+              '#3cba9f',
+              '#e8c3b9',
+              '#c45850',
+              '#ff66ff',
+              '#3300ff',
+              '#00cccc',
+              '#ffff00',
+              '#ff3300',
+              '#0000cc',
+              '#330033'
             ]
           }
         ]
@@ -33,21 +33,21 @@ export default {
       options: {
         title: {
           display: true,
-          text: "TỔNG SẢN LƯỢNG NƯỚC TỪNG THÁNG TRONG NĂM"
+          text: 'TỔNG SẢN LƯỢNG NƯỚC TỪNG THÁNG TRONG NĂM'
         },
         responsive: true,
         maintainAspectRatio: false
       }
-    };
+    }
   },
   mounted() {
     // setInterval(() => {
     //   // console.log("dat oc cho");
     //   this.renderChart(this.data, this.options);
     // }, 5000);
-    this.renderChart(this.data, this.options);
+    this.renderChart(this.data, this.options)
   }
-};
+}
 </script>
 
 <style></style>

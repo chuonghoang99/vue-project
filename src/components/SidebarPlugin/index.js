@@ -10,16 +10,15 @@ const SidebarStore = {
       path: '/admin/overview'
     }
   ],
-  displaySidebar (value) {
+  displaySidebar(value) {
     this.showSidebar = value
   }
 }
 
 const SidebarPlugin = {
-
-  install (Vue) {
+  install(Vue) {
     Vue.mixin({
-      data () {
+      data() {
         return {
           sidebarStore: SidebarStore
         }
@@ -27,7 +26,7 @@ const SidebarPlugin = {
     })
 
     Object.defineProperty(Vue.prototype, '$sidebar', {
-      get () {
+      get() {
         return this.$root.sidebarStore
       }
     })

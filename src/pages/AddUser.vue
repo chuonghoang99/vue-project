@@ -64,16 +64,16 @@
   </card>
 </template>
 <script>
-import Card from "src/components/Cards/Card.vue";
-import { mapState } from "vuex";
-import axios from "axios";
+import Card from 'src/components/Cards/Card.vue'
+import { mapState } from 'vuex'
+import axios from 'axios'
 export default {
   methods: {
     handleAddUser() {
       //alert("");
     }
   }
-};
+}
 </script>
 
 <style scoped></style>

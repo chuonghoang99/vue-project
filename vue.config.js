@@ -1,8 +1,8 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
 
 function resolveSrc(_path) {
-  return path.join(__dirname, _path);
+  return path.join(__dirname, _path)
 }
 
 module.exports = {
@@ -32,4 +32,4 @@ module.exports = {
     // Enable CSS source maps.
     sourceMap: process.env.NODE_ENV !== 'production'
   }
-};
+}

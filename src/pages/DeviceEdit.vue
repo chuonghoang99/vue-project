@@ -137,56 +137,56 @@
   </card>
 </template>
 <script>
-import Card from "src/components/Cards/Card.vue";
-import axios from "axios";
+import Card from 'src/components/Cards/Card.vue'
+import axios from 'axios'
 
 export default {
   created() {
-    let username = localStorage.getItem("userNameClick");
-    let id = localStorage.getItem("idDeviceClick");
+    let username = localStorage.getItem('userNameClick')
+    let id = localStorage.getItem('idDeviceClick')
 
-    let url = `/api/admin/${username}/device/${id}`;
+    let url = `/api/admin/${username}/device/${id}`
     //console.log("url: ", url);
 
     axios
       .get(url, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
+          Authorization: 'Bearer ' + localStorage.getItem('token')
         }
       })
       .then(result => {
-        this.deviceDetail = result.data;
+        this.deviceDetail = result.data
 
-        this.listSensor = result.data.sensorList;
+        this.listSensor = result.data.sensorList
         this.listSensor.sort((a, b) => {
-          if (a.code < b.code) return -1;
-          return a.code > b.code ? 1 : 0;
-        });
+          if (a.code < b.code) return -1
+          return a.code > b.code ? 1 : 0
+        })
 
-        this.checked_01 = this.listSensor[0].status;
-        this.checked_02 = this.listSensor[1].status;
-        this.checked_03 = this.listSensor[2].status;
-        this.checked_04 = this.listSensor[3].status;
-        this.checked_05 = this.listSensor[4].status;
+        this.checked_01 = this.listSensor[0].status
+        this.checked_02 = this.listSensor[1].status
+        this.checked_03 = this.listSensor[2].status
+        this.checked_04 = this.listSensor[3].status
+        this.checked_05 = this.listSensor[4].status
 
-        console.log(this.deviceDetail.sensorList);
+        console.log(this.deviceDetail.sensorList)
         // this.deviceDetail.sensorList.sort(dynamicSort("id"));
-        console.log("aaaaaa", this.deviceDetail);
+        console.log('aaaaaa', this.deviceDetail)
       })
       .catch(error => {
-        throw new Error(`API ${error}`);
-      });
+        throw new Error(`API ${error}`)
+      })
   },
   data() {
     return {
-      checked_01: "",
-      checked_02: "",
-      checked_03: "",
-      checked_04: "",
-      checked_05: "",
-      deviceDetail: "",
-      listSensor: ""
-    };
+      checked_01: '',
+      checked_02: '',
+      checked_03: '',
+      checked_04: '',
+      checked_05: '',
+      deviceDetail: '',
+      listSensor: ''
+    }
   },
 
   methods: {
@@ -201,40 +201,40 @@ export default {
       let sensor1 = {
         id: this.listSensor[0].id,
         name: this.listSensor[0].name,
-        code: "SENSOR1",
+        code: 'SENSOR1',
         status: this.checked_01 ? 1 : 0
-      };
+      }
       let sensor2 = {
         id: this.listSensor[1].id,
         name: this.listSensor[1].name,
-        code: "SENSOR2",
+        code: 'SENSOR2',
         status: this.checked_02 ? 1 : 0
-      };
+      }
       let sensor3 = {
         id: this.listSensor[2].id,
         name: this.listSensor[2].name,
-        code: "SENSOR3",
+        code: 'SENSOR3',
         status: this.checked_03 ? 1 : 0
-      };
+      }
       let sensor4 = {
         id: this.listSensor[3].id,
         name: this.listSensor[3].name,
-        code: "SENSOR4",
+        code: 'SENSOR4',
         status: this.checked_04 ? 1 : 0
-      };
+      }
       let sensor5 = {
         id: this.listSensor[4].id,
         name: this.listSensor[4].name,
-        code: "SENSOR5",
+        code: 'SENSOR5',
         status: this.checked_05 ? 1 : 0
-      };
+      }
 
       let json = {
-        id: localStorage.getItem("idDeviceClick"),
+        id: localStorage.getItem('idDeviceClick'),
         alive: this.deviceDetail.alive ? 1 : 0,
         name: this.deviceDetail.name,
         sensorList: [sensor1, sensor2, sensor3, sensor4, sensor5]
-      };
+      }
 
       // let a = JSON.stringify(json);
       // console.log(a);
@@ -243,28 +243,28 @@ export default {
 
       // console.log("json put ", json);
 
-      let userLogin = JSON.parse(localStorage.getItem("userLogin"));
-      const url = "/api/admin/" + userLogin.username + "/device";
+      let userLogin = JSON.parse(localStorage.getItem('userLogin'))
+      const url = '/api/admin/' + userLogin.username + '/device'
 
       axios
         .put(url, json, {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("token")
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + localStorage.getItem('token')
           }
         })
         .then(result => {
           //  console.log("aaaaaaaaa");
-          console.log(result.data);
-          alert("Update Success");
+          console.log(result.data)
+          alert('Update Success')
         })
         .catch(error => {
-          throw new Error(`API ${error}`);
-          alert("Add Device Fail");
-        });
+          throw new Error(`API ${error}`)
+          alert('Add Device Fail')
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped>

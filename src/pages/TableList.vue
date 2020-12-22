@@ -90,78 +90,78 @@
   </div>
 </template>
 <script>
-import Card from "src/components/Cards/Card.vue";
-import axios from "axios";
-import { mapState } from "vuex";
+import Card from 'src/components/Cards/Card.vue'
+import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
   created() {
-    this.$store.dispatch("loadListUser");
-    this.$store.dispatch("loadListDevice");
+    this.$store.dispatch('loadListUser')
+    this.$store.dispatch('loadListDevice')
   },
   components: {
     Card
   },
   computed: {
-    ...mapState(["listUser"])
+    ...mapState(['listUser'])
   },
   data() {
     return {
-      listDeviceOfUser: "",
-      userClick: "",
+      listDeviceOfUser: '',
+      userClick: '',
       showDeviceOfUser: false,
-      theadUser: ["Id", "Email", "FullName", "UserName", "CreateTime", "Role"],
-      theadDevice: ["Id", "Name", "Alive", "Action"],
+      theadUser: ['Id', 'Email', 'FullName', 'UserName', 'CreateTime', 'Role'],
+      theadDevice: ['Id', 'Name', 'Alive', 'Action'],
 
       deviceEdit: {}
-    };
+    }
   },
 
   methods: {
     getNumberSensor(id) {
-      return 5;
+      return 5
     },
 
     getIdDevice(id) {
-      console.log("id click: ", id);
-      localStorage.setItem("idDeviceClick", id);
+      console.log('id click: ', id)
+      localStorage.setItem('idDeviceClick', id)
     },
 
     loadListDeviceOfUser(id, username) {
       // v-show ten bang
-      this.showDeviceOfUser = true;
-      this.userClick = username;
+      this.showDeviceOfUser = true
+      this.userClick = username
 
       // Save username click
-      localStorage.setItem("userNameClick", username);
+      localStorage.setItem('userNameClick', username)
 
       // API -> List Device Of User
-      let url = "/api/admin/" + username + "/device/list";
+      let url = '/api/admin/' + username + '/device/list'
       axios
         .get(url, {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
+            Authorization: 'Bearer ' + localStorage.getItem('token')
           }
         })
         .then(result => {
-          this.listDeviceOfUser = result.data;
-          console.log("device of user", result.data);
+          this.listDeviceOfUser = result.data
+          console.log('device of user', result.data)
         })
         .catch(error => {
-          throw new Error(`API ${error}`);
-        });
+          throw new Error(`API ${error}`)
+        })
     }
   },
   filters: {
     capitalize: function(value) {
-      if (!value) return "";
-      value = value.toString();
-      return value.charAt(0).toUpperCase() + value.slice(1);
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
     },
     convertToDate(value) {
-      if (!value) return "";
-      else return new Date(value).toUTCString();
+      if (!value) return ''
+      else return new Date(value).toUTCString()
     }
   }
-};
+}
 </script>
 <style></style>

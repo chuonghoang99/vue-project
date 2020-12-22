@@ -35,7 +35,7 @@
 </template>
 <script>
 export default {
-  name: "mobile-menu"
-};
+  name: 'mobile-menu'
+}
 </script>
 <style></style>
