@@ -1,12 +1,8 @@
 <template>
-  <div class="form-group"
-       :class="{
-          'input-group': hasIcon,
-          'input-group-focus': focused
-       }">
+  <div class="form-group">
     <slot name="label">
       <label v-if="label" class="control-label">
-        {{label}}
+        {{ label }}
       </label>
     </slot>
     <slot name="addonLeft">
@@ -19,10 +15,9 @@
     <slot>
       <input
         :value="value"
-        v-bind="$attrs"
-        v-on="listeners"
         class="form-control"
-        aria-describedby="addon-right addon-left">
+        aria-describedby="addon-right addon-left"
+      />
     </slot>
     <slot name="addonRight">
       <span v-if="addonRightIcon" class="input-group-append">
@@ -35,63 +30,31 @@
   </div>
 </template>
 <script>
-  export default {
-    inheritAttrs: false,
-    name: "base-input",
-    props: {
-      label: {
-        type: String,
-        description: "Input label"
-      },
-      value: {
-        type: [String, Number],
-        description: "Input value"
-      },
-      addonRightIcon: {
-        type: String,
-        description: "Input icon on the right"
-      },
-      addonLeftIcon: {
-        type: String,
-        description: "Input icon on the left"
-      },
+export default {
+  inheritAttrs: false,
+  name: 'base-input',
+  props: {
+    label: {
+      type: String,
+      description: 'Input label'
     },
-    model: {
-      prop: 'value',
-      event: 'input'
+    value: {
+      type: [String, Number],
+      description: 'Input value'
     },
-    data() {
-      return {
-        focused: false
-      }
+    addonRightIcon: {
+      type: String,
+      description: 'Input icon on the right'
     },
-    computed: {
-      hasIcon() {
-        const { addonRight, addonLeft } = this.$slots;
-        return addonRight !== undefined || addonLeft !== undefined || this.addonRightIcon !== undefined || this.addonLeftIcon !== undefined;
-      },
-      listeners() {
-        return {
-          ...this.$listeners,
-          input: this.onInput,
-          blur: this.onBlur,
-          focus: this.onFocus
-        }
-      }
-    },
-    methods: {
-      onInput(evt) {
-        this.$emit('input', evt.target.value)
-      },
-      onFocus() {
-        this.focused = true;
-      },
-      onBlur() {
-        this.focused = false;
-      }
+    addonLeftIcon: {
+      type: String,
+      description: 'Input icon on the left'
     }
+  },
+  model: {
+    prop: 'value',
+    event: 'input'
   }
+}
 </script>
-<style>
-
-</style>
+<style></style>

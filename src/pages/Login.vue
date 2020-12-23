@@ -87,7 +87,7 @@ export default {
           password: this.password
         })
         .then(result => {
-          console.log('thanh: ', result.data)
+          console.log('dfdf', result.data)
           console.log('result login: ', result.data)
           localStorage.setItem('userLogin', JSON.stringify(result.data.user))
           localStorage.setItem('token', result.data.jwt)

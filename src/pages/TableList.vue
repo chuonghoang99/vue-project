@@ -27,9 +27,14 @@
                   <td>{{ user.email }}</td>
                   <td>{{ user.full_name }}</td>
                   <td>{{ user.username }}</td>
-                  <!-- <td v-html="convertToDate(user.create_time)"></td> -->
                   <td>{{ user.create_time | convertToDate }}</td>
                   <td>{{ user.roleDto.name }}</td>
+                  <td>
+                    <i
+                      class="far fa-trash-alt ml-3 mt-1"
+                      style="color: black"
+                    ></i>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -77,7 +82,7 @@
                     ></router-link>
                     <i
                       class="far fa-trash-alt ml-2 mt-1 "
-                      style="color: red"
+                      style="color: black"
                     ></i>
                   </td>
                 </tr>
@@ -109,7 +114,15 @@ export default {
       listDeviceOfUser: '',
       userClick: '',
       showDeviceOfUser: false,
-      theadUser: ['Id', 'Email', 'FullName', 'UserName', 'CreateTime', 'Role'],
+      theadUser: [
+        'Id',
+        'Email',
+        'FullName',
+        'UserName',
+        'CreateTime',
+        'Role',
+        'Action'
+      ],
       theadDevice: ['Id', 'Name', 'Alive', 'Action'],
 
       deviceEdit: {}
