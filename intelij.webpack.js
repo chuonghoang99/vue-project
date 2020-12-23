@@ -8,5 +8,10 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
+  },
+  devServer: {
+    disableHostCheck: true,
+    port: 8082,
+    public: '0.0.0.0:4000'
   }
 }

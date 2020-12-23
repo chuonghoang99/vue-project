@@ -4,25 +4,27 @@
     <form>
       <div class="row">
         <div class="col-md-4">
-          <base-input
+          <label for="" class="control-label">Role</label>
+          <input
+            class="form-control"
             type="text"
             label="Role"
             :disabled="true"
             placeholder="Role"
             v-model="userLogin.authorities[0].authority"
-          >
-          </base-input>
+          />
         </div>
 
         <div class="col-md-4">
-          <base-input
+          <label for="">Username</label>
+          <input
+            class="form-control"
             type="text"
             label="username"
             :disabled="true"
             placeholder="Email"
             v-model="userLogin.username"
-          >
-          </base-input>
+          />
         </div>
       </div>
 
@@ -82,15 +84,15 @@
   </card>
 </template>
 <script>
-import Card from "src/components/Cards/Card.vue";
-import { mapState } from "vuex";
+import Card from 'src/components/Cards/Card.vue'
+import { mapState } from 'vuex'
 
 export default {
   created() {
-    this.userLogin = JSON.parse(localStorage.getItem("userLogin"));
+    this.userLogin = JSON.parse(localStorage.getItem('userLogin'))
     // console.log(typeof userLogin);
 
-    console.log(this.userLogin);
+    console.log(this.userLogin)
   },
   components: {
     Card
@@ -98,20 +100,20 @@ export default {
   data() {
     return {
       userLogin: {}
-    };
+    }
   },
   computed: {
     // userLogin: JSON.parse(localStorage.getItem("userLogin"))
   },
   methods: {
     updateProfile() {
-      alert("submit profile ---> code sau nha");
+      alert('submit profile ---> code sau nha')
     }
     // test() {
     //   let x = localStorage.getItem("userLogin");
     //   return x;
     // }
   }
-};
+}
 </script>
 <style></style>

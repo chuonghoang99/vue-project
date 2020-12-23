@@ -29,12 +29,19 @@
                   <td>{{ user.username }}</td>
                   <td>{{ user.create_time | convertToDate }}</td>
                   <td>{{ user.roleDto.name }}</td>
-                  <td @click="deleteUser(user.id)">
-                    <i class="far fa-trash-alt ml-3 mt-1" style="color: black">
-                    </i>
+                  <td>
+                    <button
+                      @click="deleteUser(user.id, user.username)"
+                      type="button"
+                      class="btn btn-primary"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               </tbody>
+
+              <!-- Modal -->
             </table>
           </card>
         </div>
@@ -128,10 +135,11 @@ export default {
   },
 
   methods: {
-    deleteUser(id) {
+    deleteUser(id, name) {
+      alert(`Ban co chac chan muon xóa user:  ${name}`)
       console.log('id', id)
       let arr = [id]
-      //arr = JSON.stringify(arr)
+
       axios
         .delete('/api/admin/auth', {
           data: JSON.stringify(arr),

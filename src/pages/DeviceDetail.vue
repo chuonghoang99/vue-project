@@ -188,36 +188,43 @@ export default {
       .catch(error => {
         throw new Error(`API ${error}`)
       })
+
+    console.log('id', id)
     // get data sensor
-    axios.get(`/api/device/${id}/alldata`).then(result => {
-      this.dataSensor = result.data
+    axios
+      .get(`/api/device/${id}/alldata`)
+      .then(result => {
+        this.dataSensor = result.data
+        //console.log('result.data: ', result.data)
+        this.dataSensor.sort((a, b) => {
+          if (a.code < b.code) return -1
+          return a.code > b.code ? 1 : 0
+        })
 
-      this.dataSensor.sort((a, b) => {
-        if (a.code < b.code) return -1
-        return a.code > b.code ? 1 : 0
-      })
-
-      console.log(this.dataSensor)
-      var data = []
-      for (let i = 0; i < 5; i++) {
-        data[i] = []
-        if (this.dataSensor[i].sensorDataList.length != 0) {
-          this.dataSensor[i].sensorDataList.forEach(element => {
-            console.log('aaaaa')
-            let newLength = data[i].push(element.value)
-          })
+        //console.log(this.dataSensor)
+        var data = []
+        for (let i = 0; i < 5; i++) {
+          data[i] = []
+          if (this.dataSensor[i].sensorDataList.length != 0) {
+            this.dataSensor[i].sensorDataList.forEach(element => {
+              console.log('aaaaa')
+              let newLength = data[i].push(element.value)
+            })
+          }
         }
-      }
-      //console.log(data[0]);
-      this.dataSensor1 = data[0]
-      this.dataSensor2 = data[1]
-      this.dataSensor3 = data[2]
-      this.dataSensor4 = data[3]
-      this.dataSensor5 = data[4]
 
-      console.log(this.dataSensor1)
-      console.log(this.dataSensor2)
-    })
+        this.dataSensor1 = data[0]
+        this.dataSensor2 = data[1]
+        this.dataSensor3 = data[2]
+        this.dataSensor4 = data[3]
+        this.dataSensor5 = data[4]
+
+        console.log(this.dataSensor1)
+        console.log(this.dataSensor2)
+      })
+      .catch(error => {
+        throw new Error(`API ${error}`)
+      })
   },
   data() {
     return {
