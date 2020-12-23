@@ -6,7 +6,7 @@
         <div class="col-md-2">
           <div class="form-group select">
             <label for="exampleFormControlSelect1">Role</label>
-            <select class="form-control">
+            <select class="form-control" v-model="role">
               <option value="USER">USER </option>
               <option value="ADMIN">ADMIN</option>
             </select>
@@ -14,59 +14,58 @@
         </div>
 
         <div class="col-md-5">
-          <base-input
+          <label for="email" class="control-label">Email * </label>
+          <input
+            id="email"
+            class="form-control"
             type="email"
-            label="email"
             placeholder="Email"
-            v-model="this.email"
-          >
-          </base-input>
+            v-model="email"
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-9">
-          <base-input
+          <label class="control-label">FullName *</label>
+          <input
+            class="form-control"
             type="text"
-            label="fullname"
             placeholder="Full Name"
-            v-model="this.fullName"
-          >
-          </base-input>
+            v-model="fullName"
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-9">
-          <base-input
+          <label class="control-label">UserName *</label>
+          <input
+            class="form-control"
             type="text"
-            label="username"
             placeholder="User Name"
-            v-model="this.username"
-          >
-          </base-input>
+            v-model="userName"
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-9">
-          <base-input
+          <label class="control-label">Password *</label>
+          <input
+            class="form-control"
             type="password"
-            label="password"
             placeholder="Password"
-            v-model="this.password"
-          >
-          </base-input>
+            v-model="password"
+          />
         </div>
       </div>
       <div class="row">
         <div class="col-md-9">
-          <base-input
-            type="password"
-            label="confirm-password"
-            placeholder="Password"
-          >
-          </base-input>
+          <label class="control-label">
+            Confirm Password *
+          </label>
+          <input class="form-control" type="password" placeholder="Password" />
         </div>
       </div>
 
@@ -91,17 +90,17 @@ export default {
   data() {
     return {
       role: 'USER',
-      email: 'a',
-      fullName: 'a',
-      username: 'a',
-      password: 'a'
+      email: '',
+      fullName: '',
+      userName: '',
+      password: ''
     }
   },
 
   methods: {
     handleAddUser() {
       let json = {
-        username: this.username,
+        username: this.userName,
         password: this.password,
         email: this.email,
         full_name: this.fullName,
@@ -110,7 +109,22 @@ export default {
           code: this.role
         }
       }
-      console.log(json)
+      //console.log(json)
+      axios
+        .post('/api/admin/auth/signup', json, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+          }
+        })
+        .then(result => {
+          console.log(result.data)
+          alert('Add user thanh cong')
+        })
+        .catch(error => {
+          alert('Error: khong thanh cong')
+          throw new Error(`API ${error}`)
+        })
     }
   }
 }

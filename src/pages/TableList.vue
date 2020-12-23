@@ -29,11 +29,9 @@
                   <td>{{ user.username }}</td>
                   <td>{{ user.create_time | convertToDate }}</td>
                   <td>{{ user.roleDto.name }}</td>
-                  <td>
-                    <i
-                      class="far fa-trash-alt ml-3 mt-1"
-                      style="color: black"
-                    ></i>
+                  <td @click="deleteUser(user.id)">
+                    <i class="far fa-trash-alt ml-3 mt-1" style="color: black">
+                    </i>
                   </td>
                 </tr>
               </tbody>
@@ -130,6 +128,27 @@ export default {
   },
 
   methods: {
+    deleteUser(id) {
+      console.log('id', id)
+      let arr = [id]
+      //arr = JSON.stringify(arr)
+      axios
+        .delete('/api/admin/auth', {
+          data: JSON.stringify(arr),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+          }
+        })
+        .then(result => {
+          console.log(result.data)
+          alert('Delete done !!')
+          this.$store.dispatch('loadListUser')
+          this.showDeviceOfUser = false
+        })
+        .catch(error => {})
+    },
+
     getNumberSensor(id) {
       return 5
     },
@@ -140,6 +159,7 @@ export default {
     },
 
     loadListDeviceOfUser(id, username) {
+      //console.log(id)
       // v-show ten bang
       this.showDeviceOfUser = true
       this.userClick = username
@@ -157,7 +177,7 @@ export default {
         })
         .then(result => {
           this.listDeviceOfUser = result.data
-          console.log('device of user', result.data)
+          //console.log('device of user', result.data)
         })
         .catch(error => {
           throw new Error(`API ${error}`)

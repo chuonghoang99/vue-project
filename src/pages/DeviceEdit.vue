@@ -4,13 +4,13 @@
     <form v-if="Object.keys(deviceDetail).length !== 0">
       <div class="row">
         <div class="col-md-4">
-          <base-input
+          <label for="" class="control-label">Name Device</label>
+          <input
+            class="form-control"
             type="text"
-            label="Name Device"
             placeholder="Name Device"
             v-model="deviceDetail.name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-4 check-box  ">
           <input
@@ -191,12 +191,6 @@ export default {
 
   methods: {
     saveChange() {
-      // console.log("status ", this.checked_01);
-      // console.log("status ", this.checked_02);
-      // console.log("status ", this.checked_03);
-      // console.log("status ", this.checked_04);
-      // console.log("status ", this.checked_05);
-
       // debugger;
       let sensor1 = {
         id: this.listSensor[0].id,
