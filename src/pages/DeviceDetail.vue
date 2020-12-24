@@ -1,25 +1,23 @@
 <template>
   <card>
     <h4 slot="header" class="card-title">Device Detail</h4>
-    <form>
+    <form v-if="Object.keys(deviceDetail).length !== 0">
       <div class="row">
         <div class="col-md-3">
           <label for="" class="control-label">Name Device</label>
           <input
-            id="namedevice"
             class="form-control"
             type="text"
             placeholder="Name Device"
             :disabled="true"
-            v-model="deviceName"
+            v-model="deviceDetail.name"
           />
         </div>
         <div class="col-md-3 check-box  ">
           <input
             type="checkbox"
             :disabled="true"
-            id="name_device"
-            v-model="deviceAlive"
+            v-model="deviceDetail.alive"
           /><label for="namedevice"><span class="ml-1">Collect</span></label>
         </div>
       </div>
@@ -61,7 +59,6 @@
           <input
             :disabled="true"
             type="checkbox"
-            id="name_sensor_02"
             v-model="listSensor[1].status"
           /><label for="name_sensor_02"
             ><span class="ml-1">Collect</span></label
@@ -160,6 +157,7 @@ export default {
     this.userClick = localStorage.getItem('userNameClick')
     this.deviceClick = localStorage.getItem('idDeviceClick')
 
+    // Get infor device
     let url = `/api/admin/${this.userClick}/device/${this.deviceClick}`
     axios
       .get(url, {
@@ -168,18 +166,22 @@ export default {
         }
       })
       .then(result => {
-        this.deviceName = result.data.name
-        this.deviceAlive = result.data.alive
-        this.listSensor = result.data.sensorList
+        this.deviceDetail = result.data
 
-        // console.log('listSensor', this.listSensor)
+        this.listSensor = result.data.sensorList
+        this.listSensor.sort((a, b) => {
+          if (a.code < b.code) return -1
+          return a.code > b.code ? 1 : 0
+        })
+
+        //console.log('listSensor', this.listSensor)
 
         this.listSensor.sort((a, b) => {
           if (a.code < b.code) return -1
           return a.code > b.code ? 1 : 0
         })
 
-        console.log('listSensor', this.listSensor)
+        // console.log('listSensor', this.listSensor)
       })
       .catch(error => {
         throw new Error(`API ${error}`)
@@ -194,8 +196,8 @@ export default {
       deviceClick: '',
       userClick: '',
 
-      deviceName: '',
-      deviceAlive: '',
+      deviceDetail: '',
+
       listSensor: []
     }
   }
