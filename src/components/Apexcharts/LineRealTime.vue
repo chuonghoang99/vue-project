@@ -21,7 +21,23 @@ export default {
       return a.code > b.code ? 1 : 0
     })
 
-    console.log('this.dataSensor', this.dataSensor)
+    //console.log('this.dataSensor', this.dataSensor)
+
+    for (let i = 0; i < this.dataSensor.length; i++) {
+      this.series[i].name = this.dataSensor[i].name
+      if (this.dataSensor[i].sensorDataList.length != 0) {
+        this.dataSensor[i].sensorDataList.sort((a, b) => {
+          if (a.id > b.id) return -1
+          return a.id < b.id ? 1 : 0
+        })
+        // console.log('sensordatalist: ', this.dataSensor[i])
+        this.dataSensor[i].sensorDataList.forEach(element => {
+          // console.log(element.value)
+          this.series[i].data.unshift(element.value)
+        })
+      }
+    }
+    console.log('series: ', this.series)
 
     // for (let i = 0; i < 5; i++) {
     //   if (this.dataSensor[i].sensorDataList.length != 0) {
@@ -64,25 +80,26 @@ export default {
       // chart
       series: [
         {
-          name: 'Sensor 01',
+          name: '',
+          data: []
+        },
+
+        {
+          name: '',
+          data: []
+        },
+        {
+          name: '',
+          data: []
+        },
+        {
+          name: '',
+          data: []
+        },
+        {
+          name: '',
           data: []
         }
-        // {
-        //   name: 'Sensor 02',
-        //   data: []
-        // },
-        // {
-        //   name: 'Sensor 03',
-        //   data: []
-        // },
-        // {
-        //   name: 'Sensor 04',
-        //   data: []
-        // },
-        // {
-        //   name: 'Sensor 05',
-        //   data: []
-        // }
       ],
       chartOptions: {
         colors: ['#77B6EA', '#545454', '#00ff00', '#009900', '#ff33ff'],
@@ -144,7 +161,7 @@ export default {
             text: 'Valude'
           },
           min: 0,
-          max: 400
+          max: 100
         }
       }
     }
