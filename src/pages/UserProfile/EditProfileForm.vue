@@ -16,11 +16,10 @@
         </div>
 
         <div class="col-md-4">
-          <label for="">Username</label>
+          <label for="" class="control-label">Username</label>
           <input
             class="form-control"
             type="text"
-            label="username"
             :disabled="true"
             placeholder="Email"
             v-model="userLogin.username"
@@ -30,30 +29,31 @@
 
       <div class="row">
         <div class="col-md-10">
-          <base-input
+          <label for="" class="control-label">fullname</label>
+          <input
+            class="form-control"
             type="text"
-            label="fullname"
             placeholder="Full Name"
             v-model="userLogin.fullName"
-          >
-          </base-input>
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-12">
-          <base-input type="text" label="Address" placeholder="Home Address">
-          </base-input>
+          <label for="" class="control-label">Address</label>
+          <input class="form-control" type="text" placeholder="Home Address" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-5">
-          <base-input type="text" label="City" placeholder="City"> </base-input>
+          <label for="" class="control-label">City</label>
+          <input class="form-control" type="text" placeholder="City" />
         </div>
         <div class="col-md-5">
-          <base-input type="text" label="Country" placeholder="Country">
-          </base-input>
+          <label for="" class="control-label">Country</label>
+          <input class="form-control" type="text" placeholder="Country" />
         </div>
       </div>
 

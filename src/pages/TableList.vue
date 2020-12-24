@@ -118,6 +118,7 @@ export default {
     return {
       listDeviceOfUser: '',
       userClick: '',
+      deviceClick: '',
       showDeviceOfUser: false,
       theadUser: [
         'Id',
@@ -137,9 +138,7 @@ export default {
   methods: {
     deleteUser(id, name) {
       alert(`Ban co chac chan muon xóa user:  ${name}`)
-      console.log('id', id)
       let arr = [id]
-
       axios
         .delete('/api/admin/auth', {
           data: JSON.stringify(arr),
@@ -157,12 +156,9 @@ export default {
         .catch(error => {})
     },
 
-    getNumberSensor(id) {
-      return 5
-    },
-
     getIdDevice(id) {
-      console.log('id click: ', id)
+      this.deviceClick = id
+      console.log('device Click: ', id)
       localStorage.setItem('idDeviceClick', id)
     },
 
@@ -171,12 +167,13 @@ export default {
       // v-show ten bang
       this.showDeviceOfUser = true
       this.userClick = username
+      console.log('user click: ', username)
 
       // Save username click
       localStorage.setItem('userNameClick', username)
 
       // API -> List Device Of User
-      let url = '/api/admin/' + username + '/device/list'
+      let url = `/api/admin/${username}/device/list`
       axios
         .get(url, {
           headers: {

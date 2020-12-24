@@ -4,14 +4,13 @@
     <form class="form" v-if="Object.keys(deviceDetail).length !== 0">
       <div class="row">
         <div class="col-md-3">
-          <base-input
+          <label for="" class="control-label">Name Device</label>
+          <input
             type="text"
-            label="Name Device"
             placeholder="Name Device"
             :disabled="true"
             v-model="deviceDetail.name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-3 check-box  ">
           <input
@@ -27,14 +26,14 @@
       <h4>SenSor</h4>
       <div class="row">
         <div class="col-md-2">
-          <base-input
+          <label for="" class="control-label">Sensor 01</label>
+          <input
+            class="form-control"
             :disabled="true"
             type="text"
-            label="Sensor 01"
             placeholder="Name Sensor 01"
             v-model="deviceDetail.sensorList[0].name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-2 check-box  ">
           <input
@@ -68,14 +67,14 @@
           >
         </div>
         <div class="col-md-2">
-          <base-input
+          <label for="" class="control-label">Sensor 03</label>
+          <input
+            class="form-control"
             :disabled="true"
             type="text"
-            label="Sensor 03"
             placeholder="Name Sensor 03"
             v-model="deviceDetail.sensorList[2].name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-2 check-box  ">
           <input
@@ -91,20 +90,19 @@
 
       <div class="row">
         <div class="col-md-2">
-          <base-input
+          <label for="" class="control-label">Sensor 04</label>
+          <input
+            class="form-control"
             type="text"
             :disabled="true"
-            label="Sensor 04"
             placeholder="Name Sensor 04"
             v-model="deviceDetail.sensorList[3].name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-2 check-box  ">
           <input
             type="checkbox"
             :disabled="true"
-            id="name_sensor_04"
             :checked="deviceDetail.sensorList[3].status"
           /><label for="name_sensor_04"
             ><span class="ml-1">Collect</span></label
@@ -112,14 +110,14 @@
         </div>
 
         <div class="col-md-2">
-          <base-input
+          <label for="" class="control-label">Sensor 05</label>
+          <input
+            class="form-control"
             type="text"
             :disabled="true"
-            label="Sensor 05"
             placeholder="Name Sensor 05"
             v-model="deviceDetail.sensorList[4].name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-2 check-box  ">
           <input type="checkbox" id="name_sensor_05" :disabled="true" /><label

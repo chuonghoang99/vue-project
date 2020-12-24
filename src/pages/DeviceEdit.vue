@@ -24,13 +24,13 @@
       <h4>SenSor</h4>
       <div class="row">
         <div class="col-md-3">
-          <base-input
+          <label for="" class="control-label">Sensor 01</label>
+          <input
+            class="form-control"
             type="text"
-            label="Sensor 01"
             placeholder="Name Sensor 01"
             v-model="deviceDetail.sensorList[0].name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-3 check-box  ">
           <input
@@ -43,13 +43,13 @@
         </div>
 
         <div class="col-md-3">
-          <base-input
+          <label for="" class="control-label">Sensor 02</label>
+          <input
+            class="form-control"
             type="text"
-            label="Sensor 02"
             placeholder="Name Sensor 02"
             v-model="deviceDetail.sensorList[1].name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-3 check-box  ">
           <input
@@ -64,13 +64,13 @@
 
       <div class="row">
         <div class="col-md-3">
-          <base-input
+          <label for="" class="control-label">Sensor 03</label>
+          <input
+            class="form-control"
             type="text"
-            label="Sensor 03"
             placeholder="Name Sensor 03"
             v-model="deviceDetail.sensorList[2].name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-3 check-box  ">
           <input
@@ -83,13 +83,13 @@
         </div>
 
         <div class="col-md-3">
-          <base-input
+          <label for="" class="control-label">Sensor 04</label>
+          <input
+            class="form-control"
             type="text"
-            label="Sensor 04"
             placeholder="Name Sensor 04"
             v-model="deviceDetail.sensorList[3].name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-3 check-box  ">
           <input
@@ -102,13 +102,14 @@
         </div>
 
         <div class="col-md-3">
-          <base-input
+          <label for="" class="control-label"> Sensor 05 </label>
+          <input
+            class="form-control"
             type="text"
             label="Sensor 05"
             placeholder="Name Sensor 05"
             v-model="deviceDetail.sensorList[4].name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-3 check-box  ">
           <input
@@ -234,11 +235,10 @@ export default {
       // console.log(a);
       //debugger;
       // console.log("json edit: ", json);
-
       // console.log("json put ", json);
 
-      let userLogin = JSON.parse(localStorage.getItem('userLogin'))
-      const url = '/api/admin/' + userLogin.username + '/device'
+      let user = localStorage.getItem('userNameClick')
+      const url = `/api/admin/${user}/device`
 
       axios
         .put(url, json, {

@@ -19,13 +19,13 @@
 
       <div class="row">
         <div class="col-md-4">
-          <base-input
+          <label for="" class="control-label">Name Device</label>
+          <input
+            class="form-control"
             type="text"
-            label="Name Device"
             placeholder="Name Device"
             v-model="name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-4 check-box  ">
           <input type="checkbox" id="namesensor" v-model="alive" /><label
@@ -39,13 +39,13 @@
 
       <div class="row">
         <div class="col-md-3">
-          <base-input
+          <label for="" class="control-label">Sensor 01</label>
+          <input
+            class="form-control"
             type="text"
-            label="Sensor 01"
             placeholder="Name Sensor 01"
             v-model="sensor1.name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-3 check-box  ">
           <input
@@ -58,13 +58,14 @@
         </div>
 
         <div class="col-md-3">
-          <base-input
+          <label for="" class="control-label">Sensor 02</label>
+
+          <input
             type="text"
-            label="Sensor 02"
+            class="form-control"
             placeholder="Name Sensor 02"
             v-model="sensor2.name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-3 check-box  ">
           <input
@@ -79,13 +80,13 @@
 
       <div class="row">
         <div class="col-md-3">
-          <base-input
+          <label for="" class="control-label">Sensor 03</label>
+          <input
             type="text"
-            label="Sensor 03"
+            class="form-control"
             placeholder="Name Sensor 03"
             v-model="sensor3.name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-3 check-box  ">
           <input
@@ -98,13 +99,13 @@
         </div>
 
         <div class="col-md-3">
-          <base-input
+          <label for="" class="control-label">Sensor 04</label>
+          <input
+            class="form-control"
             type="text"
-            label="Sensor 04"
             placeholder="Name Sensor 04"
             v-model="sensor4.name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-3 check-box  ">
           <input
@@ -117,13 +118,13 @@
         </div>
 
         <div class="col-md-3">
-          <base-input
+          <label for="" class="control-label">Sensor 05</label>
+          <input
             type="text"
-            label="Sensor 05"
+            class="form-control"
             placeholder="Name Sensor 05"
             v-model="sensor5.name"
-          >
-          </base-input>
+          />
         </div>
         <div class="col-md-3 check-box  ">
           <input

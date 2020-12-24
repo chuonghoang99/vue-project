@@ -1,5 +1,3 @@
-import BaseInput from './components/Inputs/BaseInput.vue'
-
 import BaseDropdown from './components/BaseDropdown.vue'
 import Card from './components/Cards/Card.vue'
 
@@ -9,8 +7,6 @@ import Card from './components/Cards/Card.vue'
 
 const GlobalComponents = {
   install(Vue) {
-    Vue.component(BaseInput.name, BaseInput)
-
     Vue.component(BaseDropdown.name, BaseDropdown)
     Vue.component('card', Card)
   }
