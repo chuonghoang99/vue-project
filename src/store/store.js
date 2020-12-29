@@ -9,7 +9,9 @@ export default new Vuex.Store({
   state: {
     listUser: [],
     listDevice: [],
-    listDataSensor: []
+    listDataSensorMonth: [],
+    listDataSensorYear: [],
+    totalData: 0
   },
 
   getters: {
@@ -32,8 +34,17 @@ export default new Vuex.Store({
     },
 
     // SENSOR
-    SAVE_DATASENSOR(state, dataSensor) {
-      state.listDataSensor = dataSensor
+    SAVE_DATASENSORMONTH(state, data) {
+      state.listDataSensorMonth = data
+    },
+
+    SAVE_DATASESORYEAR(state, data) {
+      state.listDataSensorYear = data
+    },
+
+    // TOTAL
+    SAVE_DATATOTAL(state, data) {
+      state.totalData = data
     }
   },
   actions: {
@@ -72,14 +83,40 @@ export default new Vuex.Store({
     },
 
     // API get data sensor
-    loadDataSensor({ commit }, id) {
-      console.log('loadDataSensor run')
+    loadDataSensorMonth({ commit }, payload) {
+      // /api/device/7/alldatasensor/month/12-2020
+      // console.log('loadDataSensor run')
+      //console.log('dispath')
+      let url = `/api/device/${payload.id}/alldatasensor/month/${payload.month}-${payload.year}`
+      // console.log('url', url)
       Vue.axios
-
-        .get(`/api/device/${id}/alldata`)
+        .get(url)
         .then(result => {
-          //  console.log('loadDataSensor: ', result.data)
-          commit('SAVE_DATASENSOR', result.data)
+          //console.log('data: ', result.data)
+          commit('SAVE_DATASENSORMONTH', result.data)
+        })
+        .catch(error => {
+          throw new Error(`API ${error}`)
+        })
+    },
+
+    loadDataSenSorYear({ commit }, payload) {
+      Vue.axios
+        .get(`/api/device/${payload.id}/alldatasensor/year/${payload.year}`)
+        .then(result => {
+          commit('SAVE_DATASESORYEAR', result.data)
+        })
+        .catch(error => {
+          throw new Error(`API ${error}`)
+        })
+    },
+    loadDataTotal({ commit }) {
+      let year = 2020
+      Vue.axios
+        .get(`api/device/sumdata/year/${year}`)
+        .then(result => {
+          console.log('total ', result.data)
+          commit('SAVE_DATATOTAL', result.data)
         })
         .catch(error => {
           throw new Error(`API ${error}`)

@@ -129,19 +129,89 @@
 
       <div class="clearfix"></div>
     </form>
-
+    <br />
     <div class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="card col-md-11 ml-3 mt-5">
+          <div class="col-md-2 ml-3">
+            <div class="form-group">
+              <label for="exampleFormControlSelect2" class="ml-4">Month</label>
+              <select
+                class="form-control"
+                id="exampleFormControlSelect2"
+                v-model="monthSelectLine"
+              >
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 ml-3">
+            <div class="form-group">
+              <label for="exampleFormControlSelect2" class="ml-4">Year</label>
+              <select
+                class="form-control"
+                id="exampleFormControlSelect2"
+                v-model="yearSelectLine"
+              >
+                <option>2019</option>
+                <option>2020</option>
+                <option>2021</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card col-md-11 ml-5">
             <div>
               <line-real-time
                 :deviceClick="deviceClick"
                 :usernameClick="userClick"
+                :monthSelectLine="monthSelectLine"
+                :yearSelectLine="yearSelectLine"
               ></line-real-time>
             </div>
           </div>
         </div>
+        <br />
+        <div class="row">
+          <div class="col-md-2 ml-3">
+            <div class="form-group">
+              <label for="exampleFormControlSelect2" class="ml-4">Year</label>
+              <select
+                class="form-control"
+                id="exampleFormControlSelect2"
+                v-model="yearSelectBar"
+              >
+                <option>2019</option>
+                <option>2020</option>
+                <option>2021</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card col-md-11 ml-5">
+            <div>
+              <bar-real-time
+                :deviceClick="deviceClick"
+                :usernameClick="userClick"
+                :yearSelectBar="yearSelectBar"
+              ></bar-real-time>
+            </div>
+          </div>
+        </div>
+        <br />
       </div>
     </div>
   </card>
@@ -150,6 +220,7 @@
 import Card from 'src/components/Cards/Card.vue'
 import axios from 'axios'
 import LineRealTime from '../components/Apexcharts/LineRealTime.vue'
+import BarRealTime from '../components/Apexcharts/BarRealTime.vue'
 import LoginVue from './Login.vue'
 
 export default {
@@ -167,20 +238,16 @@ export default {
       })
       .then(result => {
         this.deviceDetail = result.data
-
         this.listSensor = result.data.sensorList
         this.listSensor.sort((a, b) => {
           if (a.code < b.code) return -1
           return a.code > b.code ? 1 : 0
         })
-
         //console.log('listSensor', this.listSensor)
-
         this.listSensor.sort((a, b) => {
           if (a.code < b.code) return -1
           return a.code > b.code ? 1 : 0
         })
-
         // console.log('listSensor', this.listSensor)
       })
       .catch(error => {
@@ -188,16 +255,32 @@ export default {
       })
   },
 
-  components: { LineRealTime },
+  components: { LineRealTime, BarRealTime },
+  watch: {
+    monthSelectLine: function(newVal, oldVal) {
+      console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+      this.$forceUpdate()
+    },
+    yearSelectLine: function(newVal, oldVal) {
+      console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+      this.$forceUpdate()
+    },
+    yearSelectBar: function(newVal, oldVal) {
+      console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+      this.$forceUpdate()
+    }
+  },
 
   data() {
     return {
+      monthSelectLine: 12,
+      yearSelectLine: 2020,
+      yearSelectBar: 2020,
+
       // props - > chart
       deviceClick: '',
       userClick: '',
-
       deviceDetail: '',
-
       listSensor: []
     }
   }

@@ -1,68 +1,69 @@
 <template>
-  <apexchart
-    ref="realtimeChart"
-    type="line"
-    height="450"
-    :options="chartOptions"
-    :series="series"
-  />
+  <div>
+    <apexchart
+      ref="realtimeChart"
+      type="line"
+      height="500"
+      :options="chartOptions"
+      :series="series"
+    />
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 export default {
+  watch: {},
   created() {
-    this.$store.dispatch('loadDataSensor', this.deviceClick)
-    this.dataSensor = this.$store.state.listDataSensor
-    console.log('this.dataSensor', this.dataSensor)
+    //  truong 31 ngay cua 1 thang
+    for (let i = 1; i < 32; i++) {
+      this.chartOptions.xaxis.categories.push(i)
+    }
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < 31; j++) {
+        this.series[i].data[j] = 0
+      }
+    }
+    console.log('this.series', this.series)
+    let payload = {
+      id: this.deviceClick,
+      month: this.monthSelectLine,
+      year: this.yearSelectLine
+    }
 
-    this.dataSensor.sort((a, b) => {
+    this.$store.dispatch('loadDataSensorMonth', payload)
+    this.dataSensorMonth = this.$store.state.listDataSensorMonth
+
+    this.dataSensorMonth.sort((a, b) => {
       if (a.code < b.code) return -1
       return a.code > b.code ? 1 : 0
     })
+    console.log(this.dataSensorMonth)
 
-    //console.log('this.dataSensor', this.dataSensor)
-
-    for (let i = 0; i < this.dataSensor.length; i++) {
-      this.series[i].name = this.dataSensor[i].name
-      if (this.dataSensor[i].sensorDataList.length != 0) {
-        this.dataSensor[i].sensorDataList.sort((a, b) => {
-          if (a.id > b.id) return -1
-          return a.id < b.id ? 1 : 0
-        })
-        // console.log('sensordatalist: ', this.dataSensor[i])
-        this.dataSensor[i].sensorDataList.forEach(element => {
-          // console.log(element.value)
-          this.series[i].data.unshift(element.value)
+    this.dataSensorMonth.forEach((item, index, array) => {
+      // console.log('item', item)
+      this.series[index].name = item.name
+      if (item.listData.length != 0) {
+        item.listData.forEach(element => {
+          // console.log(element)
+          this.series[index].data[element.date - 1] = element.sum
+          // this.series[index].data[element.date - 1] = element.sum
+          //  console.log(this.series[index].data[element.date - 1])
         })
       }
-    }
-    console.log('series: ', this.series)
-
-    // for (let i = 0; i < 5; i++) {
-    //   if (this.dataSensor[i].sensorDataList.length != 0) {
-    //     this.dataSensor[i].sensorDataList.sort((a, b) => {
-    //       if (a.id < b.id) return -1
-    //       return a.id > b.id ? 1 : 0
-    //     })
-
-    //     this.dataSensor[i].sensorDataList.forEach(element => {
-    //       let newLength = data[i].push(element.value)
-    //       console.log('data[]', data[i])
-    //     })
-    //   }
-    // }
-
-    // his.series[0].data = data[0]
-    // console.log('this.series[o].data', data[0])
-
-    // this.series[1].data = data[1]
-
-    // this.series[2].data = data[2]
-    // this.series[3].data = data[3]
-    // this.series[4].data = data[4]t
+    })
   },
-  props: ['deviceClick', 'usernameClick'],
+  props: ['deviceClick', 'usernameClick', 'monthSelectLine', 'yearSelectLine'],
+  watch: {
+    monthSelectLine: function(newVal, oldVal) {
+      console.log('Prop changed: ***', newVal, ' | was: ', oldVal)
+      this.$forceUpdate()
+    },
+    yearSelectLine: function(newVal, oldVal) {
+      console.log('Prop changed:  ***', newVal, ' | was: ', oldVal)
+      this.$forceUpdate()
+    }
+  },
 
   // chuwa load dk state -> 16
   // computed: {
@@ -70,7 +71,7 @@ export default {
   // },
   data() {
     return {
-      dataSensor: '',
+      dataSensorMonth: '',
       dataSensor1: '',
       dataSensor2: '',
       dataSensor3: '',
@@ -147,7 +148,7 @@ export default {
           enabled: false
         },
         title: {
-          text: 'Biểu đổ lượng nước các sensor của thiết bị',
+          text: 'Biểu đổ lượng nước các sensor của thiết bị theo tháng',
           align: 'left'
         },
         xaxis: {
@@ -161,24 +162,47 @@ export default {
             text: 'Valude'
           },
           min: 0,
-          max: 100
+          max: 350
         }
       }
     }
   },
   mounted() {
-    this.setDataLineChart()
+    // this.setDataLineChart()
   },
   methods: {
-    getRandomArbitrary(min, max) {
-      return Math.floor(Math.random() * 99)
+    upDateData() {
+      // this.$store.dispatch('loadDataSensor', this.deviceClick)
+      // this.dataSensor = this.$store.state.listDataSensor
+      // console.log('this.dataSensor', this.dataSensor)
+      // this.dataSensor.sort((a, b) => {
+      //   if (a.code < b.code) return -1
+      //   return a.code > b.code ? 1 : 0
+      // })
+      // //console.log('this.dataSensor', this.dataSensor)
+      // for (let i = 0; i < this.dataSensor.length; i++) {
+      //   this.series[i].name = this.dataSensor[i].name
+      //   if (this.dataSensor[i].sensorDataList.length != 0) {
+      //     this.dataSensor[i].sensorDataList.sort((a, b) => {
+      //       if (a.id > b.id) return -1
+      //       return a.id < b.id ? 1 : 0
+      //     })
+      //     // console.log('sensordatalist: ', this.dataSensor[i])
+      //     this.dataSensor[i].sensorDataList.forEach(element => {
+      //       // console.log(element.value)
+      //       this.series[i].data.unshift(element.value)
+      //     })
+      //   }
+      // }
     },
+
     setDataLineChart() {
-      // setInterval(() => {
-      //   this.series[0].data.splice(0, 1)
-      //   // this.series[0].data.push(this.getRandomArbitrary(0, 99))
-      //   this.updateSeriesLine()
-      // }, 3000)
+      setInterval(() => {
+        //this.$store.dispatch('loadDataSensor', this.deviceClick)
+        this.series[0].data.splice(0, 1)
+        // this.series[0].data.push(this.getRandomArbitrary(0, 99))
+        this.updateSeriesLine()
+      }, 3000)
     },
     updateSeriesLine() {
       //   this.$refs.realtimeChart.updateSeries(

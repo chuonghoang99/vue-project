@@ -35,7 +35,7 @@
             </div>
             <div slot="content">
               <p class="card-category">Total Data</p>
-              <h4 class="card-title">{{ this.totalData }}</h4>
+              <h4 class="card-title">{{ totalData }}</h4>
             </div>
             <div slot="footer"><i class="fa fa-clock-o"></i>Last day</div>
           </stats-card>
@@ -85,6 +85,8 @@ export default {
   created() {
     this.$store.dispatch('loadListDevice')
     this.$store.dispatch('loadListUser')
+    this.$store.dispatch('loadDataTotal')
+    this.totalData = this.$store.state.totalData
   },
   components: {
     StatsCard,
